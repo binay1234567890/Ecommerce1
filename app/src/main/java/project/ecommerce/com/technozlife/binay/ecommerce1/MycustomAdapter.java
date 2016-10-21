@@ -31,6 +31,10 @@ public class MycustomAdapter extends RecyclerView.Adapter<MycustomAdapter.MyView
         inflater = LayoutInflater.from(content);
     }
 
+    public MycustomAdapter(ArrayList<Information> data) {
+        this.data = data;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view  = inflater.inflate(R.layout.list_row_item, parent, false);

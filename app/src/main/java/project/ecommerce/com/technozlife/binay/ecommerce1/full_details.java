@@ -33,10 +33,7 @@ public class full_details extends AppCompatActivity {
         txt.setText(getIntent().getStringExtra("name"));
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 

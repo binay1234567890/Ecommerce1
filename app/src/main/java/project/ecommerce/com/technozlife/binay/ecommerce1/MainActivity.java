@@ -2,9 +2,11 @@ package project.ecommerce.com.technozlife.binay.ecommerce1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -19,7 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Cereals.OnFragmentInteractionListener {
 
     RecyclerView recycle ;
     MycustomAdapter adapter;
@@ -99,6 +101,25 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+           Cereals newFragment = new Cereals();
+            Bundle args = new Bundle();
+            newFragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.content_main, newFragment,newFragment.getTag());
+            transaction.addToBackStack(null);
+
+
+
+// Commit the transaction
+            transaction.commit();
+
+
+
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -116,5 +137,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+    }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

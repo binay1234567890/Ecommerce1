@@ -39,7 +39,7 @@ public class Data {
                 R.drawable.wheel
         };
     String name[] = {
-           "Biscuit","Coca Cola","Dalmod","KurKure","Gulcose","Horlicks","Papad","Recharge Ncell","Recharge Ntc","Rice","Rice1","soap","soap",
+           "Biscuit","Coca Cola","Dalmod","KurKure","Gulcose","Horlicks","Papad","Recharge Ncell","Recharge Ntc","Rice","Rice1","soap",
             "Soap1","Sugar","Sugar1","Wai Wai","Wheel",
     };
 
