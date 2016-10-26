@@ -5,25 +5,69 @@
     android:layout_margin="10dp"
 
     >
-    <LinearLayout
+
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:columnCount="2"
+        >
 
         <TextView
-            android:layout_width="match_parent"
+            android:text="TextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum"
             android:id="@+id/ftitle"
-            android:textSize="20sp"/>
+            android:layout_columnSpan="2"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+
 
         <TextView
-            android:layout_width="match_parent"
+            android:text="Price : Rs."
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="losdsd"
-            android:textSize="18sp"/>
+             />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pPrice" />
+
+        <TextView
+            android:text="Brands :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pBrand" />
+
+        <TextView
+            android:text="Category :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pCate" />
+
+        <TextView
+            android:text="Description :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pDes" />
+
+    </GridLayout>
 
 </android.support.v7.widget.CardView>

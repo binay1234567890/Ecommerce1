@@ -45,11 +45,10 @@ public class Data {
 
    for (int i = 0 ; i<images.length;i++ ){
 
-       Information newData = new Information();
+     /*  Information newData = new Information();
        newData.ImageId = images[i];
-       newData.title = name[i];
-       data.add(newData);
-
+       newData.ptitle = name[i];
+       data.add(newData);*/
    }
 
     return data;
@@ -57,23 +56,92 @@ public class Data {
 }
 
  class Information{
+     public String pId;
+     public Image img;
+     public String ImageId;
+     public String ptitle, pCategory,pBrand, pPrice, pDescription,pKeyword;
 
-     public int ImageId;
-     public String title;
+     public Information(String pId, String imageId, String ptitle, String pCategory, String pBrand, String pPrice, String pDescription, String pKeyword) {
+         this.pId = pId;
+         ImageId = imageId;
+         this.ptitle = ptitle;
+         this.pCategory = pCategory;
+         this.pBrand = pBrand;
+         this.pPrice = pPrice;
+         this.pDescription = pDescription;
+         this.pKeyword = pKeyword;
+     }
 
-     public int getImageId() {
+     public Information(String pId, String ptitle, String imageId) {
+         this.pId = pId;
+         this.ptitle = ptitle;
+         ImageId = imageId;
+     }
+     public Information(){}
+
+     public String getpId() {
+         return pId;
+     }
+
+     public void setpId(String pId) {
+         this.pId = pId;
+     }
+
+     public String getPtitle() {
+         return ptitle;
+     }
+
+     public void setPtitle(String ptitle) {
+         this.ptitle = ptitle;
+     }
+
+     public String getpCategory() {
+         return pCategory;
+     }
+
+     public void setpCategory(String pCategory) {
+         this.pCategory = pCategory;
+     }
+
+     public String getpBrand() {
+         return pBrand;
+     }
+
+     public void setpBrand(String pBrand) {
+         this.pBrand = pBrand;
+     }
+
+     public String getpPrice() {
+         return pPrice;
+     }
+
+     public void setpPrice(String pPrice) {
+         this.pPrice = pPrice;
+     }
+
+     public String getpKeyword() {
+         return pKeyword;
+     }
+
+     public void setpKeyword(String pKeyword) {
+         this.pKeyword = pKeyword;
+     }
+
+     public String getpDescription() {
+         return pDescription;
+     }
+
+     public void setpDescription(String pDescription) {
+         this.pDescription = pDescription;
+     }
+
+     public String getImageId() {
          return ImageId;
      }
 
-     public String getTitle() {
-         return title;
-     }
-
-     public void setImageId(int imageId) {
+     public void setImageId(String imageId) {
          ImageId = imageId;
      }
 
-     public void setTitle(String title) {
-         this.title = title;
-     }
+
  }

@@ -1,13 +1,11 @@
 package project.ecommerce.com.technozlife.binay.ecommerce1;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -19,24 +17,103 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Cereals.OnFragmentInteractionListener {
 
-    RecyclerView recycle ;
+    RecyclerView recycle;
     MycustomAdapter adapter;
     final Context context = this;
+    ArrayList<Information> array;
+    ArrayList<Information>   iarray = new ArrayList<Information>();
+    URL url;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
         setContentView(R.layout.activity_main);
-        recycle = ( RecyclerView) findViewById(R.id.recycleView);
-        adapter = new MycustomAdapter(this , Data.getData());
-        recycle.setAdapter(adapter);
-        recycle.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, "http://192.168.0.103/ecommerce/get_all_products.php",null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                int count = 0;
+
+                try {
+                    JSONArray jsonArray = response.getJSONArray("products");
+                    int b =   response.getInt("success");
+
+                   for(int i = 0; i<jsonArray.length(); i++){
+                       //Toast.makeText(getApplicationContext(), "we r here"+i, Toast.LENGTH_LONG).show();
+                       JSONObject product = (JSONObject) jsonArray.get(i);
+
+                       Information infrm = new Information(
+                               product.getString("product_id"),
+                               product.getString("product_image"),
+                               product.getString("product_title"),
+                               product.getString("product_cat"),
+                               product.getString("product_brand"),
+                               product.getString("product_price"),
+                               product.getString("product_desc"),
+                               product.getString("product_keyword"));
+
+
+                       iarray.add(infrm);
+
+
+
+                   }
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e + "", Toast.LENGTH_LONG).show();
+
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error + "", Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(req);
+
+
+        recycle = (RecyclerView) findViewById(R.id.recycleView);
+        Toast.makeText(getApplicationContext(), ""+ iarray , Toast.LENGTH_LONG).show();
+        adapter = new MycustomAdapter(this, iarray);
+        recycle.setAdapter(adapter);
+        recycle.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,6 +136,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -101,7 +179,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-           Cereals newFragment = new Cereals();
+            Cereals newFragment = new Cereals();
             Bundle args = new Bundle();
             newFragment.setArguments(args);
 
@@ -109,15 +187,12 @@ public class MainActivity extends AppCompatActivity
 
 // Replace whatever is in the fragment_container view with this fragment,
 // and add the transaction to the back stack so the user can navigate back
-            transaction.replace(R.id.content_main, newFragment,newFragment.getTag());
+            transaction.replace(R.id.content_main, newFragment, newFragment.getTag());
             transaction.addToBackStack(null);
 
 
-
-// Commit the transaction
+            // Commit the transaction
             transaction.commit();
-
-
 
 
         } else if (id == R.id.nav_gallery) {
@@ -146,4 +221,6 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+
 }

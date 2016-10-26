@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
 import java.util.ArrayList;
 
 /**
@@ -46,8 +49,10 @@ public class MycustomAdapter extends RecyclerView.Adapter<MycustomAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.text.setText(data.get(position).title);
-        holder.img.setImageResource(data.get(position).ImageId);
+        String imgurl = "http://192.168.0.103/ecommerce/images/"+data.get(position).getImageId();
+        holder.text.setText(data.get(position).ptitle);
+        Picasso.with(context).load(imgurl).resize(1080, 1080).into(holder.img);
+      //  holder.img.setImageResource(data.get(position).ImageId);
 
     }
 
@@ -86,10 +91,17 @@ public class MycustomAdapter extends RecyclerView.Adapter<MycustomAdapter.MyView
         public void onClick(View v) {
 
                 int position  = getAdapterPosition();
-                Information data  = this.data.get(position);
+                Information inform  = this.data.get(position);
                 Intent i = new Intent(this.ctx , full_details.class);
-                i.putExtra("img_id", data.getImageId());
-                i.putExtra("name", data.getTitle());
+                i.putExtra("img_id", inform.getImageId());
+                i.putExtra("name", inform.getPtitle());
+                 i.putExtra("brand", inform.getpBrand());
+            i.putExtra("cate", inform.getpCategory());
+            i.putExtra("desc", inform.getpDescription());
+            i.putExtra("pid", inform.getpId());
+            i.putExtra("key", inform.getpKeyword());
+            i.putExtra("price", inform.getpPrice());
+
                 this.ctx.startActivity(i);
 
 
